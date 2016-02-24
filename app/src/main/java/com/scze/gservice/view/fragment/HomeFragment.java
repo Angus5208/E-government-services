@@ -44,7 +44,7 @@ import java.util.concurrent.TimeUnit;
 public class HomeFragment extends BaseFragment {
 
     String httpUrl = "http://php.weather.sina.com.cn/xml.php";
-    String httpArg = "机投";
+    String httpArg = "邛崃";
 
 
     @ViewInject(R.id.button)

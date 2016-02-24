@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/E-government-services.iml" filepath="$PROJECT_DIR$/E-government-services.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gservice.iml" filepath="$PROJECT_DIR$/gservice.iml" />
     </modules>
   </component>
 </project>

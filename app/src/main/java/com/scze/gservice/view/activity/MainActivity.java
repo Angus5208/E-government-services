@@ -83,19 +83,19 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
-//        // -----------location config ------------
-//        locationService = ((MyApplication) getApplication()).locationService;
-//        //获取locationservice实例，建议应用中只初始化1个location实例，然后使用，可以参考其他示例的activity，都是通过此种方式获取locationservice实例的
-//        locationService.registerListener(mListener);
-//        //注册监听
-//        int type = getIntent().getIntExtra("from", 0);
-//        if (type == 0) {
-//            locationService.setLocationOption(locationService.getDefaultLocationClientOption());
-//        } else if (type == 1) {
-//            locationService.setLocationOption(locationService.getOption());
-//        }
-//
-//        locationService.start();// 定位SDK
+        // -----------location config ------------
+        locationService = ((MyApplication) getApplication()).locationService;
+        //获取locationservice实例，建议应用中只初始化1个location实例，然后使用，可以参考其他示例的activity，都是通过此种方式获取locationservice实例的
+        locationService.registerListener(mListener);
+        //注册监听
+        int type = getIntent().getIntExtra("from", 0);
+        if (type == 0) {
+            locationService.setLocationOption(locationService.getDefaultLocationClientOption());
+        } else if (type == 1) {
+            locationService.setLocationOption(locationService.getOption());
+        }
+
+        locationService.start();// 定位SDK
     }
 
     @Override
@@ -106,7 +106,7 @@ public class MainActivity extends FragmentActivity {
     }
 
     /*****
-     * @see copy funtion to you project
+     *
      * 定位结果回调，重写onReceiveLocation方法
      *
      */
