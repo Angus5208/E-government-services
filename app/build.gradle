@@ -17,6 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -26,5 +31,7 @@ dependencies {
     compile 'cn.pedant.sweetalert:library:1.2'
     compile 'com.makeramen:roundedimageview:2.2.1'
     compile 'org.xutils:xutils:3.3.12'
+    compile files('libs/locSDK_6.05.jar')
+    compile files('libs/baidumapapi_v3_5_0.jar')
 
 }

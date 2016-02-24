@@ -4,7 +4,7 @@
 
     <!-- 访问网络 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <!-- 这个权限用于进行网络定位-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
@@ -30,10 +30,19 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2"></action>
+            </intent-filter>
+        </service>
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="pLmwkkLPLFBQ7lWkb2GKGwaK" />       //key:开发者申请的key
+            android:value="pLmwkkLPLFBQ7lWkb2GKGwaK" />
+        //key:开发者申请的key
 
         <activity android:name=".view.activity.WelcomeActivity">
             <intent-filter>
@@ -45,15 +54,10 @@
         <activity android:name=".view.activity.GuideActivity" />
         <activity android:name=".view.activity.MainActivity" />
         <activity android:name=".view.activity.LoginActivity" />
-        <activity android:name=".view.activity.MyDetailsActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.activity.MyDetailsActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".view.activity.UserInfoActivity"></activity>
-
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" >
-        </service>
     </application>
 
 </manifest>

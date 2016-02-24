@@ -22,6 +22,14 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -34,6 +42,10 @@ import java.util.concurrent.TimeUnit;
  */
 @ContentView(R.layout.home_fragment)
 public class HomeFragment extends BaseFragment {
+
+    String httpUrl = "http://php.weather.sina.com.cn/xml.php";
+    String httpArg = "机投";
+
 
     @ViewInject(R.id.button)
     private Button button;
@@ -124,15 +136,20 @@ public class HomeFragment extends BaseFragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int c : a) {
-                    Log.e("我的", c + "");
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                Toast.makeText(getActivity(), "安了", Toast.LENGTH_SHORT).show();
+
+                String jsonResult = request(httpUrl, httpArg);
+                Log.e("测试",jsonResult+"你好");
+
+//                for (int c : a) {
+//                    Log.e("我的", c + "");
+//                    try {
+//                        Thread.sleep(1000);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//                Toast.makeText(getActivity(), "安了", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -257,5 +274,47 @@ public class HomeFragment extends BaseFragment {
         // 当Activity不可见的时候停止切换
         scheduledExecutorService.shutdown();
         super.onStop();
+    }
+
+    public static String request(String httpUrl, String httpArg) {
+        String strGBK = null;
+        String strUTF8 = null;
+        try {
+            strGBK = URLEncoder.encode(httpArg, "GBK");
+            System.out.println(strGBK);
+            strUTF8 = URLDecoder.decode(httpArg, "UTF-8");
+            System.out.println(strUTF8);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        BufferedReader reader = null;
+        String result = null;
+        StringBuffer sbf = new StringBuffer();
+        httpUrl = httpUrl + "?" +"city="+strGBK+"&password=DJOYnieT8234jlsK&day=0";
+        Log.e("测试",httpUrl);
+
+        try {
+            URL url = new URL(httpUrl);
+            HttpURLConnection connection = (HttpURLConnection) url
+                    .openConnection();
+            connection.setRequestMethod("GET");
+            // 填入apikey到HTTP header
+            connection.setRequestProperty("apikey",  "a5031c292b3d326318b55f34f2b303fe");
+            connection.connect();
+            InputStream is = connection.getInputStream();
+            reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+            String strRead = null;
+            while ((strRead = reader.readLine()) != null) {
+                sbf.append(strRead);
+                sbf.append("\r\n");
+            }
+            reader.close();
+            result = sbf.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.e("测试",result+"策四");
+        return result;
     }
 }
